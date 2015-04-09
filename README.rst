@@ -68,5 +68,8 @@ Import the generated file into your source:
    }
 
 
-For a real life example see: https://github.com/willemt/duraqueue
+For real life examples see:
+
+- https://github.com/willemt/duraqueue
+- https://github.com/willemt/peardb
 
