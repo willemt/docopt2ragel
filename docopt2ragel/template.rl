@@ -58,6 +58,7 @@ struct params
 
 static void params_init(struct params *fsm, options_t* opt)
 {
+    memset(opt, 0, sizeof(options_t));
     fsm->opt = opt;
     fsm->buflen = 0;
     %% write init;
