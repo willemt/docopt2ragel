@@ -84,7 +84,7 @@ def parse_leafs(pattern):
     return leafs, commands, arguments, flags, options
 
 
-if __name__ == '__main__':
+def main():
     args = docopt.docopt(__doc__)
 
     try:
@@ -128,7 +128,7 @@ if __name__ == '__main__':
 
     usage = '\n    '.join(map(lambda l: 'fprintf(stdout, "{0}\\n");'.format(l), doc.split('\n')))
 
-    file = os.path.join(os.path.dirname(os.path.realpath(__file__)), "template.rl")
+    file = os.path.join(os.path.dirname(os.path.realpath(__file__)), "../template.rl")
     print Template(open(file).read()).safe_substitute(
         fsm=fsm,
         usage=usage,
@@ -142,3 +142,6 @@ if __name__ == '__main__':
         argument_actions=argument_actions,
         option_defaults=option_defaults,
         )
+
+if __name__ == '__main__':
+    main()
