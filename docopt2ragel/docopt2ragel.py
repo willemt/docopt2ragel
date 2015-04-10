@@ -115,13 +115,16 @@ if __name__ == '__main__':
 
     command_fields = '\n    '.join(map(lambda c: 'int {0};'.format(clean_name(c)), commands))
     flag_fields = '\n    '.join(map(lambda c: 'int {0};'.format(clean_name(c)), flags))
-    option_fields = '\n    '.join(map(lambda c: 'int {0};'.format(clean_name(c)), options))
+    option_fields = '\n    '.join(map(lambda c: 'char* {0};'.format(clean_name(c)), options))
     argument_fields = '\n    '.join(map(lambda c: 'char* {0};'.format(clean_name(c)), arguments))
 
     command_actions = '\n    '.join(map(lambda c: 'action command_{0}{{ fsm->opt->{0} = 1; }}'.format(clean_name(c)), commands))
     flag_actions = '\n    '.join(map(lambda c: 'action option_{0}{{ fsm->opt->{0} = 1; }}'.format(clean_name(c)), flags))
-    option_actions = '\n    '.join(map(lambda c: 'action option_{0}{{ fsm->opt->{0} = 1; }}'.format(clean_name(c)), options))
+    option_actions = '\n    '.join(map(lambda c: 'action option_{0}{{ fsm->opt->{0} = strdup(fsm->buffer); }}'.format(clean_name(c)), options))
     argument_actions = '\n    '.join(map(lambda c: 'action argument_{0}{{ fsm->opt->{0} = strdup(fsm->buffer); }}'.format(clean_name(c)), arguments))
+
+    options_with_defaults = filter(lambda x: x.value is not None, options)
+    option_defaults = '\n    '.join(map(lambda c: 'fsm->opt->{0} = strdup("{1}");'.format(clean_name(c), c.value), options_with_defaults))
 
     usage = '\n    '.join(map(lambda l: 'fprintf(stdout, "{0}\\n");'.format(l), doc.split('\n')))
 
@@ -137,4 +140,5 @@ if __name__ == '__main__':
         flag_actions=flag_actions,
         option_actions=option_actions,
         argument_actions=argument_actions,
+        option_defaults=option_defaults,
         )
