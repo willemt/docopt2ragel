@@ -11,7 +11,7 @@ def long_description():
 
 setup(
     name='docopt2ragel',
-    version='0.1.0',
+    version='0.1.1',
 
     description='Convert your docopt usage text into a Ragel FSM',
     long_description=long_description(),

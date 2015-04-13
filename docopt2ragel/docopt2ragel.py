@@ -55,7 +55,10 @@ def ragel_ast(node):
     elif isinstance(node, docopt.Argument):
         return 'string 0 @argument_{name}'.format(name=cleaned_name)
     elif isinstance(node, docopt.Option):
-        return "{option} 0 @option_{name}".format(option=option_aliases(node), name=cleaned_name)
+        if 0 < node.argcount:
+            return "{option} 0 string 0 @option_{name}".format(option=option_aliases(node), name=cleaned_name)
+        else:
+            return "{option} 0 @option_{name}".format(option=option_aliases(node), name=cleaned_name)
     elif isinstance(node, docopt.Optional):
         return '({0})?'.format(' '.join(map(ragel_ast, node.children)))
     assert False
