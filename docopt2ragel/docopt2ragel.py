@@ -60,7 +60,7 @@ def ragel_ast(node):
         else:
             return "{option} 0 @option_{name}".format(option=option_aliases(node), name=cleaned_name)
     elif isinstance(node, docopt.Optional):
-        return '({0})?'.format(' '.join(map(ragel_ast, node.children)))
+        return '({0})*'.format(' '.join(map(ragel_ast, node.children)))
     assert False
 
 
