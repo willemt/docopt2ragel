@@ -131,7 +131,7 @@ def main():
 
     usage = '\n    '.join(map(lambda l: 'fprintf(stdout, "{0}\\n");'.format(l), doc.split('\n')))
 
-    file = os.path.join(os.path.dirname(os.path.realpath(__file__)), "../template.rl")
+    file = os.path.join(os.path.dirname(os.path.realpath(__file__)), "template.rl")
     print Template(open(file).read()).safe_substitute(
         fsm=fsm,
         usage=usage,

@@ -11,7 +11,7 @@ def long_description():
 
 setup(
     name='docopt2ragel',
-    version='0.1.2',
+    version='0.1.3',
 
     description='Convert your docopt usage text into a Ragel FSM',
     long_description=long_description(),
@@ -29,11 +29,13 @@ setup(
         'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
     ],
-    keywords='development logging',
+    keywords='development',
     packages=find_packages(exclude=['contrib', 'docs', 'tests*']),
     install_requires=['docopt'],
-    package_data={},
-    data_files=['template.rl'],
+    include_package_data=True,
+    package_data={
+        '': ['template.rl']
+    },
     entry_points={
         'console_scripts': [
             'docopt2ragel = docopt2ragel.__main__:main',
