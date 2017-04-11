@@ -15,6 +15,7 @@ Arguments:
   <docopt>      Input file describing your CLI in docopt language.
 """
 
+from __future__ import print_function
 
 import sys
 import os.path
@@ -132,7 +133,7 @@ def main():
     usage = '\n    '.join(map(lambda l: 'fprintf(stdout, "{0}\\n");'.format(l), doc.split('\n')))
 
     file = os.path.join(os.path.dirname(os.path.realpath(__file__)), "template.rl")
-    print Template(open(file).read()).safe_substitute(
+    print(Template(open(file).read()).safe_substitute(
         fsm=fsm,
         usage=usage,
         command_fields=command_fields,
@@ -144,7 +145,7 @@ def main():
         option_actions=option_actions,
         argument_actions=argument_actions,
         option_defaults=option_defaults,
-        )
+        ))
 
 if __name__ == '__main__':
     main()
